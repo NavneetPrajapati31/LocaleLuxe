@@ -20,7 +20,7 @@ async function main() {
 const getCoordinatesFromHere = async (location) => {
   try {
     const response = await axios.get(
-      `https://geocode.search.hereapi.com/v1/geocode?q=${location}&apiKey=bGRMHyx0wJDGbjz6y1Gly1IXhl6b_HDhg_d7dhIVGqM`
+      `https://geocode.search.hereapi.com/v1/geocode?q=${location}&apiKey=${process.env.MAP_API_KEY}`
     );
     if (response.data.items.length > 0) {
       const { lat, lng } = response.data.items[0].position;

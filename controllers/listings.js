@@ -113,3 +113,15 @@ module.exports.deleteListing = async (req, res) => {
   req.flash("success", "Listing Deleted!");
   res.redirect("/listings");
 };
+
+module.exports.search = async (req, res) => {
+  const location = req.query.location || ""; // get location from query param
+  try {
+    const listings = await Listing.find({
+      location: { $regex: location, $options: "i" }, // case-insensitive search
+    });
+    res.render("listings/index.ejs", { listings }); // Render listings page with filtered results
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch listings" });
+  }
+};

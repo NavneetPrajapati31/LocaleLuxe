@@ -28,45 +28,53 @@ module.exports.showListing = async (req, res) => {
 };
 
 module.exports.createListing = async (req, res, next) => {
-  let url = req.file.path;
-  let filename = req.file.filename;
-  let location = req.body.listing.location;
+  try {
+    let url = req.file.path;
+    let filename = req.file.filename;
+    let location = req.body.listing.location;
 
-  if (!location) {
-    req.flash("error", "Location is required!");
-    return res.redirect("/listings"); // Redirect if location is missing
-  }
+    if (!location) {
+      req.flash("error", "Location is required!");
+      return res.redirect("/listings"); // Redirect if location is missing
+    }
 
-  const geocodeUrl = `https://geocode.search.hereapi.com/v1/geocode?q=${encodeURIComponent(
-    location
-  )}&apikey=${process.env.MAP_API_KEY}`;
+    // Construct the Geocoding API request URL
+    const geocodeUrl = `https://geocode.search.hereapi.com/v1/geocode?q=${encodeURIComponent(
+      location
+    )}&apikey=${process.env.MAP_API_KEY}`;
 
-  const response = await axios.get(geocodeUrl);
+    // Make request to HERE Geocoding API
+    const response = await axios.get(geocodeUrl);
 
-  if (response.data.items.length > 0) {
-    const position = response.data.items[0].position; // Get lat and lng
+    if (response.data.items.length > 0) {
+      const position = response.data.items[0].position; // Get lat & lng
 
-    // Create GeoJSON object
-    const geoJSON = {
-      type: "Point", // GeoJSON type
-      coordinates: [position.lng, position.lat], // Longitude, Latitude
-    };
+      // Create GeoJSON object
+      const geoJSON = {
+        type: "Point", // GeoJSON format
+        coordinates: [position.lng, position.lat], // Longitude, Latitude
+      };
 
-    // Create new listing
-    const newListing = new Listing(req.body.listing);
-    newListing.owner = req.user._id;
-    newListing.image = { url, filename };
-    newListing.geometry = geoJSON; // Store GeoJSON in the geometry field
+      // Create a new listing
+      const newListing = new Listing(req.body.listing);
+      newListing.owner = req.user._id;
+      newListing.image = { url, filename };
+      newListing.geometry = geoJSON; // Store GeoJSON in the database
 
-    // Save the listing to the database
-    let savedListing = await newListing.save();
-    console.log(savedListing);
+      // Save the listing
+      let savedListing = await newListing.save();
+      console.log("New Listing Created:", savedListing);
 
-    req.flash("success", "New Listing Created!");
-    res.redirect("/listings"); // Redirect after successful creation
-  } else {
-    req.flash("error", "Location not found!");
-    return res.redirect("/listings"); // Handle case where location is not found
+      req.flash("success", "New Listing Created!");
+      res.redirect(`/listings/${savedListing._id}`); // Redirect after successful creation
+    } else {
+      req.flash("error", "Location not found! Try a different address.");
+      return res.redirect("/listings/new");
+    }
+  } catch (error) {
+    console.error("Geocoding API Error:", error.message);
+    req.flash("error", "Failed to fetch location. Please try again.");
+    res.redirect("/listings/new");
   }
 };
 

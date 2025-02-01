@@ -121,4 +121,6 @@ function addMarkersToMap() {
 }
 
 // Ensure the map is initialized before using it
-window.onload = initializeMap;
+document.addEventListener("DOMContentLoaded", function () {
+  initializeMap();
+});

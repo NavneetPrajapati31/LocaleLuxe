@@ -1,4 +1,4 @@
-var apiKey = process.env.MAP_API_KEY; // Replace with your actual HERE API key
+var apiKey = bGRMHyx0wJDGbjz6y1Gly1IXhl6b_HDhg_d7dhIVGqM; // Replace with your actual HERE API key
 var platform, map, geocoder;
 
 function initializeMap() {

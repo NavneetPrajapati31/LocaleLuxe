@@ -52,10 +52,9 @@ const initDB = async () => {
       // Add geometry and ensure type is set to "Point"
       return {
         ...obj,
-        owner: "679bf3c5162b4e0928b426b3", // Use a default owner if necessary
+        owner: "679d59f61f12f1805aef1e9e", // Use a default owner if necessary
         geometry: {
-          type: "Point", // Ensure this is set to "Point"
-          // coordinates: [Coordinates.lng, Coordinates.lat], // Ensure coordinates are set
+          type: "Point",
           coordinates: [77.1025, 28.7041],
         },
       };

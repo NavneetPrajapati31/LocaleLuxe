@@ -51,68 +51,78 @@
   }
 </style>
 
-<div id="filters">
-  <div class="all-filters collapse navbar-collapse">
-    <div class="filter">
-      <div><i class="fa-solid fa-fire-flame-simple"></i></div>
-      <p>Trending</p>
-    </div>
+<div id="filters" class="container">
+  <!-- Toggle button for smaller screens -->
+  <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#filterList" aria-expanded="false" aria-controls="filterList">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <div class="filter">
-      <div><i class="fa-solid fa-bed"></i></div>
-      <p>Rooms</p>
-    </div>
+  <!-- Filters list, collapses on smaller screens -->
+  <div class="collapse navbar-collapse" id="filterList">
+    <div class="all-filters">
+      <div class="filter">
+        <div><i class="fa-solid fa-fire-flame-simple"></i></div>
+        <p>Trending</p>
+      </div>
 
-    <div class="filter">
-      <div><i class="fa-solid fa-mountain-city"></i></div>
-      <p>Iconic cities</p>
-    </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-bed"></i></div>
+        <p>Rooms</p>
+      </div>
 
-    <div class="filter">
-      <div><i class="fa-solid fa-umbrella-beach"></i></div>
-      <p>Surfing</p>
-    </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-mountain-city"></i></div>
+        <p>Iconic cities</p>
+      </div>
 
-    <div class="filter">
-      <div><i class="fa-solid fa-person-swimming"></i></div>
-      <p>Amazing pools</p>
-    </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-umbrella-beach"></i></div>
+        <p>Surfing</p>
+      </div>
 
-    <div class="filter">
-      <div><i class="fa-solid fa-mountain-sun"></i></div>
-      <p>Amazing views</p>
-    </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-person-swimming"></i></div>
+        <p>Amazing pools</p>
+      </div>
 
-    <div class="filter">
-      <div><i class="fa-solid fa-tractor"></i></div>
-      <p>Farms</p>
-    </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-mountain-sun"></i></div>
+        <p>Amazing views</p>
+      </div>
 
-    <div class="filter">
-      <div><i class="fa-solid fa-person-shelter"></i></div>
-      <p>Cabins</p>
-    </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-tractor"></i></div>
+        <p>Farms</p>
+      </div>
 
-    <div class="filter">
-      <div><i class="fa-regular fa-snowflake"></i></div>
-      <p>Arctic</p>
-    </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-person-shelter"></i></div>
+        <p>Cabins</p>
+      </div>
 
-    <div class="filter">
-      <div><i class="fa-solid fa-tent"></i></div>
-      <p>Camping</p>
-    </div>
+      <div class="filter">
+        <div><i class="fa-regular fa-snowflake"></i></div>
+        <p>Arctic</p>
+      </div>
 
-    <div class="filter">
-      <div><i class="fa-solid fa-mound"></i></div>
-      <p>Deserts</p>
-    </div>
+      <div class="filter">
+        <div><i class="fa-solid fa-tent"></i></div>
+        <p>Camping</p>
+      </div>
 
-    <div class="filter">
-      <div><i class="fa-solid fa-ship"></i></div>
-      <p>Boats</p>
+      <div class="filter">
+        <div><i class="fa-solid fa-mound"></i></div>
+        <p>Deserts</p>
+      </div>
+
+      <div class="filter">
+        <div><i class="fa-solid fa-ship"></i></div>
+        <p>Boats</p>
+      </div>
     </div>
   </div>
+</div>
+
 
   <div class="tax-switch">
     <div class="form-check-reverse form-switch">

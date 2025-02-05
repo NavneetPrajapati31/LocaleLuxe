@@ -21,8 +21,8 @@ router
   );
 
 //New Route
-// router.get("/new", isLoggedIn, listingController.renderNewForm);
-router.get("/new", listingController.renderNewForm);
+router.get("/new", isLoggedIn, listingController.renderNewForm);
+// router.get("/new", listingController.renderNewForm);
 router.get("/search", listingController.search);
 
 router

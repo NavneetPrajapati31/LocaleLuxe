@@ -1,7 +1,10 @@
 const User = require("../models/user");
 
 module.exports.renderSignupForm = (req, res) => {
-  res.render("users/signup.ejs");
+  res.render("users/signup.ejs", {
+    success: req.flash("success"),
+    error: req.flash("error"),
+  });
 };
 
 module.exports.signup = async (req, res) => {
@@ -15,16 +18,19 @@ module.exports.signup = async (req, res) => {
         return next(err);
       }
       req.flash("success", "Welcome to LocaleLuxe!");
-      res.redirect("/listings");
+      return res.redirect("/listings");
     });
   } catch (e) {
     req.flash("error", e.message);
-    res.redirect("/signup");
+    return res.redirect("/signup");
   }
 };
 
 module.exports.renderLoginForm = (req, res) => {
-  res.render("users/login.ejs");
+  res.render("users/login.ejs", {
+    success: req.flash("success"),
+    error: req.flash("error"),
+  });
 };
 
 module.exports.login = async (req, res) => {

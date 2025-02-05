@@ -3,11 +3,18 @@ const axios = require("axios");
 
 module.exports.index = async (req, res) => {
   const allListings = await Listing.find({});
-  res.render("listings/index.ejs", { allListings });
+  res.render(
+    "listings/index.ejs",
+    { allListings },
+    { success: req.flash("success"), error: req.flash("error") }
+  );
 };
 
 module.exports.renderNewForm = (req, res) => {
-  res.render("listings/new.ejs");
+  res.render("listings/new.ejs", {
+    success: req.flash("success"),
+    error: req.flash("error"),
+  });
 };
 
 module.exports.showListing = async (req, res) => {
@@ -24,7 +31,11 @@ module.exports.showListing = async (req, res) => {
     req.flash("error", "Listing Does Not Exist!");
     res.redirect("/listings");
   }
-  res.render("listings/show.ejs", { listing });
+  res.render(
+    "listings/show.ejs",
+    { listing },
+    { success: req.flash("success"), error: req.flash("error") }
+  );
 };
 
 module.exports.createListing = async (req, res, next) => {
@@ -88,7 +99,11 @@ module.exports.renderEditForm = async (req, res) => {
 
   let originalImageUrl = listing.image.url;
   originalImageUrl = originalImageUrl.replace("/upload", "/upload/w_250");
-  res.render("listings/edit.ejs", { listing, originalImageUrl });
+  res.render(
+    "listings/edit.ejs",
+    { listing, originalImageUrl },
+    { success: req.flash("success"), error: req.flash("error") }
+  );
 };
 
 module.exports.updateListing = async (req, res) => {
@@ -120,7 +135,11 @@ module.exports.search = async (req, res) => {
     const allListings = await Listing.find({
       location: { $regex: location, $options: "i" }, // case-insensitive search
     });
-    res.render("listings/index.ejs", { allListings }); // Render listings page with filtered results
+    res.render(
+      "listings/index.ejs",
+      { allListings },
+      { success: req.flash("success"), error: req.flash("error") }
+    ); // Render listings page with filtered results
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch listings" });
   }

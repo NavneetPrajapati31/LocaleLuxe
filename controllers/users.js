@@ -18,11 +18,11 @@ module.exports.signup = async (req, res) => {
         return next(err);
       }
       req.flash("success", "Welcome to LocaleLuxe!");
-      return res.redirect("/listings");
+      res.redirect("/listings");
     });
   } catch (e) {
     req.flash("error", e.message);
-    return res.redirect("/signup");
+    res.redirect("/signup");
   }
 };
 
